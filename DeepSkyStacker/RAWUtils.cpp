@@ -656,7 +656,7 @@ public :
 		return TRUE;
 	};
 
-	void checkCameraSupport(const CString& strModel);
+	static void checkCameraSupport(CString const& strModel);
 
 	LONG	GetISOSpeed() noexcept
 	{
@@ -747,10 +747,9 @@ public :
 	};
 };
 
-void CRawDecod::checkCameraSupport(const CString& strModel)
+void CRawDecod::checkCameraSupport(CString const& strModel)
 {
-	bool result = false;
-	const char * camera = static_cast<LPCSTR>(strModel);
+	char const* camera = static_cast<LPCSTR>(strModel);
 
 	static std::set<std::string> checkedCameras;
 
@@ -759,17 +758,14 @@ void CRawDecod::checkCameraSupport(const CString& strModel)
 	// complaints about unsupported cameras are only issued once.
 	//
 	auto it = checkedCameras.find(camera);
-
-	if (it != checkedCameras.end() )
-	{
+	if (it != checkedCameras.end())
 		return;
-	}
 
 	static std::vector<std::string> supportedCameras;
 
-	if (0 == supportedCameras.size())
+	if (supportedCameras.empty())
 	{
-		const char **cameraList = rawProcessor.cameraList();
+		char const** cameraList = rawProcessor.cameraList();
 		const size_t count = rawProcessor.cameraCount();
 		supportedCameras.reserve(count);
 
@@ -778,32 +774,24 @@ void CRawDecod::checkCameraSupport(const CString& strModel)
 		//
 		for (size_t i = 0; i != count; ++i)
 		{
-			if (nullptr != cameraList[i])
+			if (cameraList[i])
 			{
-				supportedCameras.push_back(cameraList[i]);
+				supportedCameras.emplace_back(cameraList[i]);
 			}
 		}
+
 		//
 		// sort the names using std::sort
-		sort(supportedCameras.begin(), supportedCameras.end());
+		std::sort(supportedCameras.begin(), supportedCameras.end());
 	}
 
 	//
 	// The camera type hasn't already been checked, so search the LibRaw supported camera list
 	//
-	result = binary_search(supportedCameras.begin(), supportedCameras.end(), camera,
-		[](const std::string &lhs, const std::string &rhs) noexcept
+    bool result = binary_search(supportedCameras.begin(), supportedCameras.end(), camera, [](std::string const& lhs, std::string const& rhs) noexcept
 	{
-		const char* pclhs = lhs.c_str();
-		const char* pcrhs = rhs.c_str();
-		size_t len = strlen(pclhs);
-		const size_t szrhs = strlen(pcrhs);
-		// choose the shorter length
-		len = (len > szrhs) ? szrhs : len;
-		const int result = _strnicmp(pclhs, pcrhs, len);
-		return (result < 0) ? true : false;
-	}
-		);
+        return lhs < rhs;
+	});
 
 	//
 	// Now we know whether this camera is supported or not, remember we've seen it before
@@ -813,7 +801,7 @@ void CRawDecod::checkCameraSupport(const CString& strModel)
 	//
 	// If the camera isn't supported complain, but only once
 	//
-	if (false == result)
+	if (!result)
 	{
 		CString errorMessage;
 		errorMessage.Format(IDS_CAMERA_NOT_SUPPORTED, camera);
@@ -823,8 +811,6 @@ void CRawDecod::checkCameraSupport(const CString& strModel)
 		AfxMessageBox(errorMessage, MB_OK | MB_ICONWARNING);
 #endif
 	}
-
-	return;
 };
 /* ------------------------------------------------------------------- */
 
