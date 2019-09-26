@@ -1,9 +1,8 @@
 #if !defined(AFX_GRADIENTCTRL_H__BA457C5B_AA8B_4E1F_8399_57B9E3C1A406__INCLUDED_)
 #define AFX_GRADIENTCTRL_H__BA457C5B_AA8B_4E1F_8399_57B9E3C1A406__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // GradientCtrl.h : header file
 //
 

@@ -1,9 +1,8 @@
 #if !defined(AFX_RGBTAB_H__82B3FFF2_8DA4_4979_BCC7_09D28857619B__INCLUDED_)
 #define AFX_RGBTAB_H__82B3FFF2_8DA4_4979_BCC7_09D28857619B__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // RGBTab.h : header file
 //
 

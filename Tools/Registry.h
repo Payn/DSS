@@ -34,16 +34,6 @@
 //	(see below).
 // -----------------------------------------------------------------------------
 
-#ifdef _EXPLICIT
-	#pragma message (__FILE__ ": Redefining macro _EXPLICIT")
-	#undef _EXPLICIT
-#endif
-
-#if _MSC_VER >= 1100
-	#define _EXPLICIT	explicit
-#else
-	#define _EXPLICIT
-#endif
 
 #ifndef STRICT
 	#pragma message (__FILE__ ": You should #define STRICT to keep CRegistry behave correct in all circumstances.")
@@ -69,7 +59,7 @@ class CRegistry {
 #endif	// _REG_NO_TREEWALK
 
 	public:
-		_EXPLICIT CRegistry( HKEY OpenKey = HKEY_CURRENT_USER ) ;
+        explicit CRegistry( HKEY OpenKey = HKEY_CURRENT_USER ) ;
 		CRegistry( const CRegistry & ) ;
 		virtual ~CRegistry() ;
 
@@ -307,12 +297,12 @@ class CRegVal {
 
 	public:
 		CRegVal() ;
-		_EXPLICIT CRegVal( DWORD ValueToSet );
-		_EXPLICIT CRegVal( LPCTSTR ValueToSet );
+        explicit CRegVal( DWORD ValueToSet );
+        explicit CRegVal( LPCTSTR ValueToSet );
 		CRegVal( const LPBYTE pBuffer, DWORD Size);
 
 #ifdef _AFXDLL
-		_EXPLICIT CRegVal( const CStringArray & ValueToSet ) ;
+        explicit CRegVal( const CStringArray & ValueToSet ) ;
 #endif
 
 		~CRegVal() ;

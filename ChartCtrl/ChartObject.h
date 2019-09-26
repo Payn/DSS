@@ -22,9 +22,7 @@
 #if !defined(AFX_CHARTOBJECT_H__6ED024F2_00D9_45D5_AB83_258EF0075288__INCLUDED_)
 #define AFX_CHARTOBJECT_H__6ED024F2_00D9_45D5_AB83_258EF0075288__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include <afx.h>			
 #include <afxwin.h>

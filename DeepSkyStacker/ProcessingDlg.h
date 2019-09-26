@@ -1,9 +1,8 @@
 #if !defined(AFX_PROCESSINGDLG_H__744333B6_CE01_4CA9_B554_4EB7D98B544D__INCLUDED_)
 #define AFX_PROCESSINGDLG_H__744333B6_CE01_4CA9_B554_4EB7D98B544D__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // ProcessingDlg.h : header file
 //
 

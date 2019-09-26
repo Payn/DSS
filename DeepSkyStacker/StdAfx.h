@@ -6,9 +6,8 @@
 #if !defined(AFX_STDAFX_H__C280BBDC_7360_4663_B015_7C2BE32EF97A__INCLUDED_)
 #define AFX_STDAFX_H__C280BBDC_7360_4663_B015_7C2BE32EF97A__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 
 #if defined(USE_HOARD)
 #pragma comment(lib, "lib\\winhoard.lib")

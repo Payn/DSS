@@ -21,9 +21,7 @@
 #if !defined(AFX_WNDIMAGE_H__18E060C2_DE37_4419_B87A_09ACF6963828__INCLUDED_)
 #define AFX_WNDIMAGE_H__18E060C2_DE37_4419_B87A_09ACF6963828__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include "ButtonToolbar.h"
 

@@ -1,9 +1,8 @@
 #if !defined(AFX_SCROLLDIALOG_H__D46063D6_1480_11D3_8EEA_00104B30908A__INCLUDED_)
 #define AFX_SCROLLDIALOG_H__D46063D6_1480_11D3_8EEA_00104B30908A__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // ScrollDialog.h : header file
 //
 

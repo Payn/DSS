@@ -330,7 +330,7 @@
 // When using VC, turn off browser references
 // Turn off unavoidable compiler warnings
 
-#if defined(_MSC_VER) && (_MSC_VER > 1100)
+#if defined(_MSC_VER) 
 	#pragma component(browser, off, references, "CStdString")
 	#pragma warning (disable : 4290) // C++ Exception Specification ignored
 	#pragma warning (disable : 4127) // Conditional expression is constant
@@ -657,7 +657,7 @@ inline const Type& SSMAX(const Type& arg1, const Type& arg2)
 // member functions to deal with COM types & compiler support classes e.g.
 // _bstr_t
 
-#if defined (_MSC_VER) && (_MSC_VER >= 1100)
+#if defined (_MSC_VER) 
 	#include <comdef.h>
 	#define SS_INC_COMDEF		// signal that we #included MS comdef.h file
 	#define STDSTRING_INC_COMDEF
@@ -1129,15 +1129,6 @@ inline PWSTR StdCodeCvt(PWSTR pDst, int nDst, PCWSTR pSrc, int nSrc)
 	#define TSTRING_DEFINED
 #endif
 
-// a very shorthand way of applying the fix for KB problem Q172398
-// (basic_string assignment bug)
-
-#if defined ( _MSC_VER ) && ( _MSC_VER < 1200 )
-	#define Q172398(x) (x).erase()
-#else
-	#define Q172398(x)
-#endif
-
 // =============================================================================
 // INLINE FUNCTIONS ON WHICH CSTDSTRING RELIES
 //
@@ -1183,18 +1174,6 @@ inline PWSTR StdCodeCvt(PWSTR pDst, int nDst, PCWSTR pSrc, int nSrc)
 			&& 0 != (C1_BLANK & toYourMother);
 	}
 
-#endif
-
-// If they defined SS_NO_REFCOUNT, then we must convert all assignments
-
-#if defined (_MSC_VER) && (_MSC_VER < 1300)
-	#ifdef SS_NO_REFCOUNT
-		#define SSREF(x) (x).c_str()
-	#else
-		#define SSREF(x) (x)
-	#endif
-#else
-	#define SSREF(x) (x)
 #endif
 
 // -----------------------------------------------------------------------------
@@ -1249,7 +1228,7 @@ inline void	ssasn(std::string& sDst, const std::string& sSrc)
 	if ( sDst.c_str() != sSrc.c_str() )
 	{
 		sDst.erase();
-		sDst.assign(SSREF(sSrc));
+		sDst.assign(sSrc);
 	}
 }
 inline void	ssasn(std::string& sDst, PCSTR pA)
@@ -1274,7 +1253,6 @@ inline void	ssasn(std::string& sDst, PCSTR pA)
 
 	else
 	{
-		Q172398(sDst);
 		sDst.assign(pA);
 	}
 }
@@ -1353,7 +1331,7 @@ inline void	ssasn(std::wstring& sDst, const std::wstring& sSrc)
 	if ( sDst.c_str() != sSrc.c_str() )
 	{
 		sDst.erase();
-		sDst.assign(SSREF(sSrc));
+		sDst.assign(sSrc);
 	}
 }
 inline void	ssasn(std::wstring& sDst, PCWSTR pW)
@@ -1378,7 +1356,6 @@ inline void	ssasn(std::wstring& sDst, PCWSTR pW)
 
 	else
 	{
-		Q172398(sDst);
 		sDst.assign(pW);
 	}
 }
@@ -2111,18 +2088,18 @@ public:
 	{
 	}
 
-	CStdStr(const MYTYPE& str) : MYBASE(SSREF(str))
+	CStdStr(const MYTYPE& str) : MYBASE(str)
 	{
 	}
 
 	CStdStr(const std::string& str)
 	{
-		ssasn(*this, SSREF(str));
+		ssasn(*this, str);
 	}
 
 	CStdStr(const std::wstring& str)
 	{
-		ssasn(*this, SSREF(str));
+		ssasn(*this, str);
 	}
 
 	CStdStr(PCMYSTR pT, MYSIZE n) : MYBASE(pT, n)
@@ -2216,7 +2193,6 @@ public:
 
 	MYTYPE& operator=(CT t)
 	{
-		Q172398(*this);
 		this->assign(1, t);
 		return *this;
 	}
@@ -2240,12 +2216,11 @@ public:
 	// Overloads  also needed to fix the MSVC assignment bug (KB: Q172398)
 	//  *** Thanks to Pete The Plumber for catching this one ***
 	// They also are compiled if you have explicitly turned off refcounting
-	#if ( defined(_MSC_VER) && ( _MSC_VER < 1200 ) ) || defined(SS_NO_REFCOUNT)
+	#if defined(SS_NO_REFCOUNT)
 
 		MYTYPE& assign(const MYTYPE& str)
 		{
-			Q172398(*this);
-			sscpy(GetBuffer(str.size()+1), SSREF(str));
+			sscpy(GetBuffer(str.size()+1), str);
 			this->ReleaseBuffer(str.size());
 			return *this;
 		}
@@ -2260,7 +2235,6 @@ public:
 
 			nChars		= SSMIN(nChars, str.length() - nStart);
 			MYTYPE strTemp(str.c_str()+nStart, nChars);
-			Q172398(*this);
 			this->assign(strTemp);
 			return *this;
 		}
@@ -2301,21 +2275,12 @@ public:
 			// Q172398 only fix -- erase before assigning, but not if we're
 			// assigning from our own buffer
 
-	#if defined ( _MSC_VER ) && ( _MSC_VER < 1200 )
-			if ( !this->empty() &&
-				( pC < this->data() || pC > this->data() + this->capacity() ) )
-			{
-				this->erase();
-			}
-	#endif
-			Q172398(*this);
 			static_cast<MYBASE*>(this)->assign(pC, nChars);
 			return *this;
 		}
 
 		MYTYPE& assign(MYSIZE nChars, MYVAL val)
 		{
-			Q172398(*this);
 			static_cast<MYBASE*>(this)->assign(nChars, val);
 			return *this;
 		}
@@ -2327,14 +2292,6 @@ public:
 
 		MYTYPE& assign(MYCITER iterFirst, MYCITER iterLast)
 		{
-	#if defined ( _MSC_VER ) && ( _MSC_VER < 1200 )
-			// Q172398 fix.  don't call erase() if we're assigning from ourself
-			if ( iterFirst < this->begin() ||
-                 iterFirst > this->begin() + this->size() )
-            {
-				this->erase()
-            }
-	#endif
 			this->replace(this->begin(), this->end(), iterFirst, iterLast);
 			return *this;
 		}
@@ -4007,19 +3964,19 @@ typedef CStdStr<OLECHAR>	CStdStringO;	// almost always CStdStringW
 
 inline CStdStringA operator+(const CStdStringA& s1, const CStdStringA& s2)
 {
-	CStdStringA sRet(SSREF(s1));
+	CStdStringA sRet(s1);
 	sRet.append(s2);
 	return sRet;
 }
 inline CStdStringA operator+(const CStdStringA& s1, CStdStringA::value_type t)
 {
-	CStdStringA sRet(SSREF(s1));
+	CStdStringA sRet(s1);
 	sRet.append(1, t);
 	return sRet;
 }
 inline CStdStringA operator+(const CStdStringA& s1, PCSTR pA)
 {
-	CStdStringA sRet(SSREF(s1));
+	CStdStringA sRet(s1);
 	sRet.append(pA);
 	return sRet;
 }
@@ -4042,7 +3999,7 @@ inline CStdStringA operator+(const CStdStringA& s1, const CStdStringW& s2)
 }
 inline CStdStringW operator+(const CStdStringW& s1, const CStdStringW& s2)
 {
-	CStdStringW sRet(SSREF(s1));
+	CStdStringW sRet(s1);
 	sRet.append(s2);
 	return sRet;
 }
@@ -4054,7 +4011,7 @@ inline CStdStringA operator+(const CStdStringA& s1, PCWSTR pW)
 #ifdef UNICODE
 	inline CStdStringW operator+(PCWSTR pW, const CStdStringA& sA)
 	{
-		return CStdStringW(pW) + CStdStringW(SSREF(sA));
+		return CStdStringW(pW) + CStdStringW(sA);
 	}
 	inline CStdStringW operator+(PCSTR pA, const CStdStringW& sW)
 	{
@@ -4074,13 +4031,13 @@ inline CStdStringA operator+(const CStdStringA& s1, PCWSTR pW)
 // ...Now the wide string versions.
 inline CStdStringW operator+(const CStdStringW& s1, CStdStringW::value_type t)
 {
-	CStdStringW sRet(SSREF(s1));
+	CStdStringW sRet(s1);
 	sRet.append(1, t);
 	return sRet;
 }
 inline CStdStringW operator+(const CStdStringW& s1, PCWSTR pW)
 {
-	CStdStringW sRet(SSREF(s1));
+	CStdStringW sRet(s1);
 	sRet.append(pW);
 	return sRet;
 }

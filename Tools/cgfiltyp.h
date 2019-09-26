@@ -8,9 +8,7 @@
 //-	Purpose	:	File Type Access
 //- -----------------------------------------------------------------
 
-#if	_MSC_VER > 1000
 #pragma once
-#endif
 
 #ifndef __CGFILTYP_H__
 #define __CGFILTYP_H__

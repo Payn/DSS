@@ -1,9 +1,8 @@
 #if !defined(AFX_SATURATIONTAB_H__947342A1_F290_4BAF_AA71_4D5432E47E65__INCLUDED_)
 #define AFX_SATURATIONTAB_H__947342A1_F290_4BAF_AA71_4D5432E47E65__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // SaturationTab.h : header file
 //
 

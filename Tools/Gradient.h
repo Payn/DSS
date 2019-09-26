@@ -5,9 +5,7 @@
 #if !defined(AFX_GRADIENT_H__B8518180_B289_11D4_A890_C3D6794EED5F__INCLUDED_)
 #define AFX_GRADIENT_H__B8518180_B289_11D4_A890_C3D6794EED5F__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include <afxtempl.h>
 

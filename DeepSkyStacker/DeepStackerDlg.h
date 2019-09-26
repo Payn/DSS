@@ -1,9 +1,8 @@
 #if !defined(AFX_DEEPSTACKERDLG_H__C02E1779_4790_4F52_89BD_FD816B7D1C7D__INCLUDED_)
 #define AFX_DEEPSTACKERDLG_H__C02E1779_4790_4F52_89BD_FD816B7D1C7D__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // DeepStackerDlg.h : header file
 //
 

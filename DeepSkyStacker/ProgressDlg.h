@@ -1,9 +1,8 @@
 #if !defined(AFX_PROGRESSDLG_H__D0849A0E_7DFE_4678_8C62_BA6DBD081F81__INCLUDED_)
 #define AFX_PROGRESSDLG_H__D0849A0E_7DFE_4678_8C62_BA6DBD081F81__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // ProgressDlg.h : header file
 //
 

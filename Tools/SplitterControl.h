@@ -13,9 +13,8 @@
 #if !defined(AFX_SPLITTERCONTROL_H__FEBBA242_B2C9_4403_B68D_E519D645CB15__INCLUDED_)
 #define AFX_SPLITTERCONTROL_H__FEBBA242_B2C9_4403_B68D_E519D645CB15__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // SplitterControl.h : header file
 //
 

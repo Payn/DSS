@@ -45,9 +45,7 @@
 // Uncomment the following line to enable support for sound effects
 #define	BTNST_USE_SOUND
 
-#if _MSC_VER >= 1000
 #pragma once
-#endif // _MSC_VER >= 1000
 
 // Return values
 #ifndef	BTNST_OK

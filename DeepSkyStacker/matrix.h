@@ -90,7 +90,7 @@
 #pragma option -w-inl -w-pch
 #endif
 
-#if ( defined(__BORLANDC__) || _MSC_VER <= 1000 ) && !defined( __GNUG__ )
+#if ( defined(__BORLANDC__) ) && !defined( __GNUG__ )
 #  include <stdio.h>
 #  include <stdlib.h>
 #  include <math.h>
@@ -103,17 +103,6 @@
 #  include <cstdlib>
 #  include <string>
 #  include <iostream>
-#endif
-
-#if defined(_MSC_VER) && _MSC_VER <= 1000
-#  define _NO_EXCEPTION        // stdexception is not fully supported in MSVC++ 4.0
-typedef int bool;
-#  if !defined(false)
-#    define false  0
-#  endif
-#  if !defined(true)
-#    define true   1
-#  endif
 #endif
 
 #if defined(__BORLANDC__) && !defined(__WIN32__)
@@ -130,13 +119,9 @@ typedef int bool;
 #  define _THROW_MATRIX_ERROR
 #else
 #  if defined(_MSC_VER)
-#    if _MSC_VER >= 1020
-#      include <stdexcept>
-#    else
-#      include <stdexcpt.h>
-#    endif
+#     include <stdexcept>
 #  elif defined(__MWERKS__)
-#      include <stdexcept>
+#     include <stdexcept>
 #  elif (__GNUC__ >= 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 8))
 #     include <stdexcept>
 #  else
@@ -167,10 +152,6 @@ inline long double abs (long double v) { return fabsl( v); }
 #define FRIEND_FUN_TEMPLATE <>
 #else
 #define FRIEND_FUN_TEMPLATE
-#endif
-
-#if defined(_MSC_VER) && _MSC_VER <= 1020   // MSVC++ 4.0/4.2 does not
-#  define _NO_NAMESPACE                     // support "std" namespace
 #endif
 
 #if !defined(_NO_NAMESPACE)
@@ -312,13 +293,6 @@ private:
     void reallocate (size_t row, size_t col);
     int pivot (size_t row);
 };
-
-#if defined(_MSC_VER) && _MSC_VER <= 1020
-#  undef  _NO_THROW               // MSVC++ 4.0/4.2 does not support
-#  undef  _THROW_MATRIX_ERROR     // exception specification in definition
-#  define _NO_THROW
-#  define _THROW_MATRIX_ERROR
-#endif
 
 // constructor
 MAT_TEMPLATE inline

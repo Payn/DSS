@@ -1,9 +1,8 @@
 #if !defined(AFX_BITMAPSLIDER_H__BED36788_B60C_4C9E_AC56_FE430B93A0FD__INCLUDED_)
 #define AFX_BITMAPSLIDER_H__BED36788_B60C_4C9E_AC56_FE430B93A0FD__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // BitmapSlider.h : header file
 //
 

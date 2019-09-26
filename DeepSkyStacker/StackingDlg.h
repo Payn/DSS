@@ -1,9 +1,8 @@
 #if !defined(AFX_STACKINGDLG_H__04779310_B6E7_4523_BB0C_90ACAC6C1522__INCLUDED_)
 #define AFX_STACKINGDLG_H__04779310_B6E7_4523_BB0C_90ACAC6C1522__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // StackingDlg.h : header file
 //
 

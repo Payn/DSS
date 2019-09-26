@@ -1,9 +1,8 @@
 #if !defined(AFX_REGISTERSETTINGS_H__ADADF4EE_1999_4E95_A37D_886007272EBE__INCLUDED_)
 #define AFX_REGISTERSETTINGS_H__ADADF4EE_1999_4E95_A37D_886007272EBE__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // RegisterSettings.h : header file
 //
 

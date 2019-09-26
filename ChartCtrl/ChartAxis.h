@@ -22,9 +22,7 @@
 #if !defined(AFX_CHARTAXIS_H__063D695C_43CF_4A46_8AA0_C7E00268E0D3__INCLUDED_)
 #define AFX_CHARTAXIS_H__063D695C_43CF_4A46_8AA0_C7E00268E0D3__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include "ChartObject.h"
 #include <afx.h>

@@ -1,9 +1,8 @@
 #if !defined(AFX_PICTURELISTCTRL_H__D2ACDE68_6141_4B93_BD30_6B71D7497D34__INCLUDED_)
 #define AFX_PICTURELISTCTRL_H__D2ACDE68_6141_4B93_BD30_6B71D7497D34__INCLUDED_
 
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+
 // PictureListCtrl.h : header file
 //
 
